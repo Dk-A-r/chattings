@@ -1,21 +1,42 @@
+import streamlit as st
 from langchain import PromptTemplate, HuggingFaceHub, LLMChain
 
-hug_token=input("This chatbot is based on HuggingFace Hub.\n\
-Please, enter your huggingface token: ")
+st.write('This is test string35')
+st.write('This chatbot is based on HuggingFace Hub.\
+Please, enter your huggingface token.')
+
+x = 0
+
+HUG_TOKEN = st.text_input("Token: ", key=x, type='password',
+                          placeholder='Please, enter your huggingface token')
 
 template = """Question: {question}
-
-
 Answer: Let's think step by step."""
 prompt = PromptTemplate(template=template, input_variables=["question"])
-llm_chain = LLMChain(prompt=prompt, llm=HuggingFaceHub(huggingfacehub_api_token=hug_token, repo_id="google/flan-t5-xl", model_kwargs={"temperature":0, "max_length":64}))
 
-print("Now we will start the conversation. If you become bored, you can type \"quit\" in your prompt to exit. Good luck!")
+if HUG_TOKEN:
+    llm_chain = LLMChain(prompt=prompt,
+                         llm=HuggingFaceHub(huggingfacehub_api_token=HUG_TOKEN,
+                                            repo_id="google/flan-t5-xl",
+                                            model_kwargs={"temperature": 0,
+                                                          "max_length": 64}))
 
-while True:
-    question = input("User: ")
-    if question == 'quit':
-        print("Goodbye!")
-        break
-    response =llm_chain.run(question)
-    print(f"Answer is: {response}. \n What is your next question?")
+    st.write(
+        'Now we will start the conversation.\
+         If you become bored, you can type "quit"\
+          in your prompt to exit. Good luck!')
+
+    x = x + 1
+
+    question = st.text_input("User: ", key=x)
+
+    while question:
+        x = x + 1
+
+        if question == 'quit':
+            st.write("Goodbye!")
+            break
+        response = llm_chain.run(question)
+        st.write(f"Answer is: {response}")
+        st.write("What is your next question?")
+        question = st.text_input("User: ", key=x)
