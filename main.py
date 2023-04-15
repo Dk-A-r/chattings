@@ -1,7 +1,6 @@
 import streamlit as st
 from langchain import PromptTemplate, HuggingFaceHub, LLMChain
 
-st.write('This is test string35')
 st.write('This chatbot is based on HuggingFace Hub.\
 Please, enter your huggingface token.')
 
