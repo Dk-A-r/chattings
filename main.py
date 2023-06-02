@@ -9,12 +9,12 @@ x = 0
 HUG_TOKEN = st.text_input("Token: ", key=x, type='password',
                           placeholder='Please, enter your huggingface token')
 
-template = """Question: {question}
+TEMPLATE = """Question: {question}
 Answer: Let's think step by step."""
-prompt = PromptTemplate(template=template, input_variables=["question"])
+PROMPT = PromptTemplate(template=TEMPLATE, input_variables=["question"])
 
 if HUG_TOKEN:
-    llm_chain = LLMChain(prompt=prompt,
+    llm_chain = LLMChain(prompt=PROMPT,
                          llm=HuggingFaceHub(huggingfacehub_api_token=HUG_TOKEN,
                                             repo_id="google/flan-t5-xl",
                                             model_kwargs={"temperature": 0,
