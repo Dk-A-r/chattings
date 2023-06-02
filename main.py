@@ -1,41 +1,54 @@
 import streamlit as st
+import os
+from langchain.llms import OpenAI
 from langchain import PromptTemplate, HuggingFaceHub, LLMChain
 
-st.write('This chatbot is based on HuggingFace Hub.\
-Please, enter your huggingface token.')
+option = st.selectbox('Choose your LLM: ',
+                      ('OpenAI', 'flan(HuggingFaceHub)'))
+
+st.write('This chatbot is based on two large language models.\
+Please, enter your token from chosen model.')
 
 x = 0
 
-HUG_TOKEN = st.text_input("Token: ", key=x, type='password',
-                          placeholder='Please, enter your huggingface token')
+TOKEN = st.text_input("Token: ", key=x, type='password',
+                      placeholder='Please, enter your token')
 
-TEMPLATE = """Question: {question}
-Answer: Let's think step by step."""
-PROMPT = PromptTemplate(template=TEMPLATE, input_variables=["question"])
+if option:
+    if TOKEN:
+        if option=='OpenAI':
+            os.environ["OPENAI_API_KEY"] = TOKEN
+            model = OpenAI()
+        elif option=='flan(HuggingFaceHub)':
+            os.environ["HUGGINGFACEHUB_API_TOKEN"] = TOKEN
+            model = HuggingFaceHub(repo_id="google/flan-t5-xl",
+                                   model_kwargs={"temperature": 0,
+                                   "max_length": 64})
 
-if HUG_TOKEN:
-    llm_chain = LLMChain(prompt=PROMPT,
-                         llm=HuggingFaceHub(huggingfacehub_api_token=HUG_TOKEN,
-                                            repo_id="google/flan-t5-xl",
-                                            model_kwargs={"temperature": 0,
-                                                          "max_length": 64}))
+        TEMPLATE = """Question: {question}
+        Answer: Let's think step by step."""
+        PROMPT = PromptTemplate(template=TEMPLATE, input_variables=["question"])
 
-    st.write(
-        'Now we will start the conversation.\
-         If you become bored, you can type "quit"\
-          in your prompt to exit. Good luck!')
+        if TOKEN:
+            llm_chain = LLMChain(prompt=PROMPT,
+                                 llm=model)
 
-    x = x + 1
+            st.write(
+                'Now we will start the conversation.\
+                 If you become bored, you can type "quit"\
+                  in your prompt to exit. Good luck!')
 
-    question = st.text_input("User: ", key=x)
-
-    while question:
         x = x + 1
 
-        if question == 'quit':
-            st.write("Goodbye!")
-            break
-        response = llm_chain.run(question)
-        st.write(f"Answer is: {response}")
-        st.write("What is your next question?")
         question = st.text_input("User: ", key=x)
+
+        while question:
+            x = x + 1
+
+            if question == 'quit':
+                st.write("Goodbye!")
+                break
+            response = llm_chain.run(question)
+            st.write(f"Answer is: {response}")
+            st.write("What is your next question?")
+            question = st.text_input("User: ", key=x)
