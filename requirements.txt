@@ -1,3 +1,2 @@
-langchain
+transformers
 streamlit
-huggingface_hub
