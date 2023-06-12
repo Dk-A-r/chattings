@@ -1,4 +1,4 @@
 transformers
 streamlit
 sentencepiece
-datasets transformers[sentencepiece]
+transformers[sentencepiece]
