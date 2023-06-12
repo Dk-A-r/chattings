@@ -2,3 +2,6 @@ transformers
 streamlit
 sentencepiece
 transformers[sentencepiece]
+torch
+torchvision
+torchaudio
