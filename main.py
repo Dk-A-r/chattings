@@ -16,9 +16,9 @@ PROMPT = PromptTemplate(template=TEMPLATE, input_variables=["question"])
 if HUG_TOKEN:
     llm_chain = LLMChain(prompt=PROMPT,
                          llm=HuggingFaceHub(huggingfacehub_api_token=HUG_TOKEN,
-                                            repo_id="google/flan-t5-xl",
-                                            model_kwargs={"temperature": 0,
-                                                          "max_length": 64}))
+                                            repo_id="google/flan-t5-xxl",
+                                            model_kwargs={"temperature": 0.9,
+                                                          "max_length": 512}))
 
     st.write(
         'Now we will start the conversation.\
