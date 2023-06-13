@@ -21,9 +21,9 @@ if option:
             model = OpenAI()
         elif option=='flan(HuggingFaceHub)':
             os.environ["HUGGINGFACEHUB_API_TOKEN"] = TOKEN
-            model = HuggingFaceHub(repo_id="google/flan-t5-xl",
-                                   model_kwargs={"temperature": 0,
-                                   "max_length": 64})
+            model = HuggingFaceHub(repo_id="google/flan-t5-xxl",
+                                   model_kwargs={"temperature": 0.9,
+                                   "max_length": 512})
 
         TEMPLATE = """Question: {question}
         Answer: Let's think step by step."""
