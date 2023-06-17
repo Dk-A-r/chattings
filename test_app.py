@@ -16,6 +16,8 @@ def input_field():
 
 def test_input_invitation():
     assert  input_invitation == 0
+    print(input_invitation)
 
 def test_input_field():
     assert test_input_field == 0
+    print(test_input_field)
