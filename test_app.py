@@ -16,12 +16,12 @@ def check_app():
     x = requests.get('https://dk-a-r-chattings-main-4jb2u4.streamlit.app/')
     return x.status_code
 
-def test_streamlit():
-    assert check_streamlit() == 200
+def test_streamlit(check_streamlit):
+    assert check_streamlit == 200
 
-def test_model():
-    assert check_model() == 200
+def test_model(check_model):
+    assert check_model == 200
 
-def test_app():
-    assert check_app() == 200
+def test_app(check_app):
+    assert check_app == 200
 
