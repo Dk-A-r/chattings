@@ -17,11 +17,11 @@ def check_app():
     return x.status_code
 
 def test_streamlit():
-    assert check_streamlit == 200
+    assert check_streamlit() == 200
 
 def test_model():
-    assert check_model == 200
+    assert check_model() == 200
 
 def test_app():
-    assert check_app == 200
+    assert check_app() == 200
 
