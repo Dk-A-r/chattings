@@ -32,7 +32,7 @@ def invitation_to_write():
 def token_field():
     x = 0
     st.text_input("Token: ", key=x, type='password',
-                              placeholder='Please, enter your huggingface token')
+                  placeholder='Please, enter your huggingface token')
     return 0
 
 
@@ -54,4 +54,3 @@ def test_invitation(invitation_to_write):
 
 def test_token_field(token_field):
     assert token_field == 0
-
