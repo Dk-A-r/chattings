@@ -18,4 +18,4 @@ def test_input_invitation():
     assert  input_invitation == 0
 
 def test_input_field():
-    assert test_input_fielf == 0
+    assert test_input_field == 0
