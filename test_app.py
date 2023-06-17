@@ -2,7 +2,7 @@ import pytest
 import streamlit as st
 
 @pytest.fixture()
-def input_invatation():
+def input_invitation():
     st.write('This chatbot is based on HuggingFace Hub.\
     Please, enter your huggingface token.')
     return 0
