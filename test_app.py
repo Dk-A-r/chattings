@@ -9,7 +9,7 @@ def input_invatation():
 
 @pytest.fixture()
 def input_field():
-    HUG_TOKEN = st.text_input("Token: ", key=x, type='password',
+    HUG_TOKEN = st.text_input("Token: ", type='password',
                           placeholder='Please, enter your huggingface token')
     return 0
 
