@@ -1,7 +1,11 @@
 import pytest
 import requests
 import streamlit as st
+import os
+from langchain import PromptTemplate, HuggingFaceHub, LLMChain
 
+
+SECRET = os.environ['SECRET']
 
 @pytest.fixture()
 def check_streamlit():
@@ -38,6 +42,9 @@ def token_field():
 
 @pytest.fixture()
 def prompt():
+    TEMPLATE = """Question: {question}
+    Answer: Let's think step by step."""
+    PROMPT = PromptTemplate(template=TEMPLATE, input_variables=["question"])
     llm_chain = LLMChain(prompt=PROMPT,
                          llm=HuggingFaceHub(huggingfacehub_api_token=SECRET,
                                             repo_id="google/flan-t5-xxl",
