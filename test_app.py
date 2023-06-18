@@ -55,7 +55,7 @@ def prompt():
     return bool(response)
 
 
-def test_streamlit(check_streamlit): # resourses checks
+def test_streamlit(check_streamlit):  # resourses checks
     assert check_streamlit == 200
 
 
@@ -67,7 +67,7 @@ def test_app(check_app):
     assert check_app == 200
 
 
-def test_invitation(invitation_to_write): # visual checks
+def test_invitation(invitation_to_write):  # visual checks
     assert invitation_to_write == 0
 
 
@@ -75,6 +75,5 @@ def test_token_field(token_field):
     assert token_field == 0
 
 
-def test_prompt(prompt): # test the API connection
+def test_prompt(prompt):  # test the API connection
     assert prompt
-    
