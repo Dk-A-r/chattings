@@ -7,6 +7,7 @@ from langchain import PromptTemplate, HuggingFaceHub, LLMChain
 
 SECRET = os.environ['SECRET']
 
+
 @pytest.fixture()
 def check_streamlit():
     x = requests.get('https://streamlit.io/')
@@ -53,6 +54,7 @@ def prompt():
     response = llm_chain.run('Where the London is located?')
     return bool(response)
 
+
 def test_streamlit(check_streamlit):
     assert check_streamlit == 200
 
@@ -74,4 +76,5 @@ def test_token_field(token_field):
 
 
 def test_prompt(prompt):
-    assert prompt == True
+    assert prompt
+
