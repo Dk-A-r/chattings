@@ -36,7 +36,7 @@ def token_field():
     return 0
 
 
-@pytest.fixture():
+@pytest.fixture()
 def prompt():
     llm_chain = LLMChain(prompt=PROMPT,
                          llm=HuggingFaceHub(huggingfacehub_api_token=SECRET,
