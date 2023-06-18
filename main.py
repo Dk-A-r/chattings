@@ -29,7 +29,6 @@ if HUG_TOKEN:
 
     question = st.text_input("User: ", key=x)
 
-
     while question:
         x = x + 1
 
