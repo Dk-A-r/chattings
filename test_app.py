@@ -36,6 +36,16 @@ def token_field():
     return 0
 
 
+@pytest.fixture():
+def prompt():
+    llm_chain = LLMChain(prompt=PROMPT,
+                         llm=HuggingFaceHub(huggingfacehub_api_token=SECRET,
+                                            repo_id="google/flan-t5-xxl",
+                                            model_kwargs={"temperature": 0.9,
+                                                          "max_length": 512}))
+    response = llm_chain.run('Where the London is located?')
+    return bool(response)
+
 def test_streamlit(check_streamlit):
     assert check_streamlit == 200
 
@@ -54,3 +64,7 @@ def test_invitation(invitation_to_write):
 
 def test_token_field(token_field):
     assert token_field == 0
+
+
+def test_prompt(prompt):
+    assert prompt == True
